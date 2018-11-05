@@ -3,15 +3,15 @@
 import unittest
 
 
-def merge_sort(numbers):
+def merge_sort_space_expensive(numbers):
     # Base case
     if len(numbers) <= 1:
         return numbers
 
     # Recursive case
     mid_pt = len(numbers) // 2
-    left = merge_sort(numbers[:mid_pt])
-    right = merge_sort(numbers[mid_pt:])
+    left = merge_sort_space_expensive(numbers[:mid_pt])
+    right = merge_sort_space_expensive(numbers[mid_pt:])
 
     # Merging phase
     sub_numbers = []
@@ -34,34 +34,31 @@ def merge_sort(numbers):
     return sub_numbers
 
 
-def merge():
-    pass
-
-
-class Test(unittest.TestCase):
+class TestMSSpaceExpensive(unittest.TestCase):
+    """Test merge_sort_space_expensive() functionality."""
 
     def test_null(self):
-        actual = merge_sort([])
+        actual = merge_sort_space_expensive([])
         expected = []
         self.assertEqual(actual, expected)
 
     def test_single_repeated_number(self):
-        actual = merge_sort([1, 1])
+        actual = merge_sort_space_expensive([1, 1])
         expected = [1, 1]
         self.assertEqual(actual, expected)
 
     def test_short_list(self):
-        actual = merge_sort([1, 2, 3, 2])
+        actual = merge_sort_space_expensive([1, 2, 3, 2])
         expected = [1, 2, 2, 3]
         self.assertEqual(actual, expected)
 
     def test_medium_list(self):
-        actual = merge_sort([1, 2, 5, 5, 5, 5])
+        actual = merge_sort_space_expensive([1, 2, 5, 5, 5, 5])
         expected = [1, 2, 5, 5, 5, 5]
         self.assertEqual(actual, expected)
 
     def test_long_list(self):
-        actual = merge_sort([4, 1, 4, 8, 3, 2, 7, 6, 5])
+        actual = merge_sort_space_expensive([4, 1, 4, 8, 3, 2, 7, 6, 5])
         expected = [1, 2, 3, 4, 4, 5, 6, 7, 8]
         self.assertEqual(actual, expected)
 
