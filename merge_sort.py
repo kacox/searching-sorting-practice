@@ -4,6 +4,7 @@ import unittest
 
 
 def merge_sort_space_expensive(numbers):
+    """Merge sort implemented by passing slices to recursive calls."""
     # Base case
     if len(numbers) <= 1:
         return numbers
@@ -14,24 +15,29 @@ def merge_sort_space_expensive(numbers):
     right = merge_sort_space_expensive(numbers[mid_pt:])
 
     # Merging phase
-    sub_numbers = []
+    return merge_se(left, right)
+
+
+def merge_se(left, right):
+    """Returns a single sorted, merged list."""
+    sorted_list = []
     while len(left) or len(right):
         if len(left) and len(right):
             # while they both have elements
             if left[0] > right[0]:
                 # choose right element
-                sub_numbers.append(right.pop(0))
+                sorted_list.append(right.pop(0))
             else:
                 # choose left element
-                sub_numbers.append(left.pop(0))
+                sorted_list.append(left.pop(0))
         elif not len(left):
             # must choose right
-            sub_numbers.append(right.pop(0))
+            sorted_list.append(right.pop(0))
         else:
             # must choose left
-            sub_numbers.append(left.pop(0))
+            sorted_list.append(left.pop(0))
 
-    return sub_numbers
+    return sorted_list
 
 
 class TestMSSpaceExpensive(unittest.TestCase):
