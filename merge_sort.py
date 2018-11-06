@@ -4,7 +4,7 @@ import unittest
 
 
 ## IMPLEMENTATION 1
-def merge_sort_space_expensive(numbers):
+def merge_sort_naive(numbers):
     """Merge sort implemented by passing slices to recursive calls."""
     # Base case
     if len(numbers) <= 1:
@@ -12,14 +12,11 @@ def merge_sort_space_expensive(numbers):
 
     # Recursive case
     mid_pt = len(numbers) // 2
-    left = merge_sort_space_expensive(numbers[:mid_pt])
-    right = merge_sort_space_expensive(numbers[mid_pt:])
-
-    # Merging phase
-    return merge_se(left, right)
+    return merge_naive(merge_sort_naive(numbers[:mid_pt]),
+                    merge_sort_naive(numbers[mid_pt:]))
 
 
-def merge_se(left, right):
+def merge_naive(left, right):
     """Returns a single sorted, merged list."""
     sorted_list = []
     while len(left) or len(right):
@@ -90,31 +87,31 @@ def merge_efficient(numbers, helper, low, mid, high):
 
 
 ## TESTS
-class TestMSSpaceExpensive(unittest.TestCase):
-    """Test merge_sort_space_expensive() functionality."""
+class TestMSNaive(unittest.TestCase):
+    """Test merge_sort_naive() functionality."""
 
     def test_null(self):
-        actual = merge_sort_space_expensive([])
+        actual = merge_sort_naive([])
         expected = []
         self.assertEqual(actual, expected)
 
     def test_single_repeated_number(self):
-        actual = merge_sort_space_expensive([1, 1])
+        actual = merge_sort_naive([1, 1])
         expected = [1, 1]
         self.assertEqual(actual, expected)
 
     def test_short_list(self):
-        actual = merge_sort_space_expensive([1, 2, 3, 2])
+        actual = merge_sort_naive([1, 2, 3, 2])
         expected = [1, 2, 2, 3]
         self.assertEqual(actual, expected)
 
     def test_medium_list(self):
-        actual = merge_sort_space_expensive([1, 2, 5, 5, 5, 5])
+        actual = merge_sort_naive([1, 2, 5, 5, 5, 5])
         expected = [1, 2, 5, 5, 5, 5]
         self.assertEqual(actual, expected)
 
     def test_long_list(self):
-        actual = merge_sort_space_expensive([4, 1, 4, 8, 3, 2, 7, 6, 5])
+        actual = merge_sort_naive([4, 1, 4, 8, 3, 2, 7, 6, 5])
         expected = [1, 2, 3, 4, 4, 5, 6, 7, 8]
         self.assertEqual(actual, expected)
 
