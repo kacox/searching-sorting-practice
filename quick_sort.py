@@ -1,4 +1,8 @@
-"""Implementation of the Quick Sort algorithm."""
+"""Implementation of the Quick Sort algorithm.
+
+Average case: O(n log n)
+Worst (rarer) case: O(n**2)
+"""
 
 import unittest
 
@@ -12,19 +16,17 @@ def quick_sort(num_list, left_indx, right_indx):
     # loop until inversion
     while i <= j:
         # left progression
-        while num_list[i] < pivot:
+        while pivot > num_list[i]:
             i += 1
 
         # right progression
-        while num_list[j] > pivot:
+        while pivot < num_list[j]:
             j -= 1
 
         # if no inversion
         if i <= j:
             # swap left and right VALUES
-            hold_left = num_list[i]
-            num_list[i] = num_list[j]
-            num_list[j] = hold_left
+            num_list[i], num_list[j] = num_list[j], num_list[i]
 
             # adjust left and right indices
             i += 1
